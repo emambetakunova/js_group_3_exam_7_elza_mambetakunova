@@ -1,51 +1,55 @@
 import React, { Component } from 'react';
 
-import Ingredient from './components/IngredientComponent/Ingredient';
+import Positions './co'
 
 import './App.css';
 
 
-const INGREDIENTS = [
-  {name: 'Meat', image: meatImage},
-  {name: 'Cheese', image: cheeseImage},
-  {name: 'Salad', image: saladImage},
-  {name: 'Bacon', image: baconImage}
+const POSITIONS = [
+  {name: 'Hamburger', image: hamburgerImage},
+  {name: 'Cheeseburger', image: cheeseburgerImage},
+  {name: 'Fries', image: friesImage},
+  {name: 'Coffee', image: coffeeImage},
+  {name: 'Tea', image: teaImage},
+  {name: 'Cola', image: colaImage}
 ];
 
 
 class App extends Component {
 
   state = {
-    usedIngredients: [],
-    ingredients: [
-      {name: '', price: 50, count: 0},
-      {name: 'Cheese', price: 20, count: 0},
-      {name: 'Salad', price: 5, count: 0},
-      {name: 'Bacon', price: 30, count: 0}
+    usedPositions: [],
+    positions: [
+      {name: 'Hamburger', price: 110, count: 0},
+      {name: 'Cheeseburger', price: 120, count: 0},
+      {name: 'Fries', price: 45, count: 0},
+      {name: 'Coffee', price: 70, count: 0},
+      {name: 'Tea', price: 20, count: 0},
+      {name: 'Cola', price: 35, count: 0}
     ]
   };
 
-  addElement = (key) => {
+  addElement = (index) => {
     let ingredients = [...this.state.ingredients];
-    let ingredient = ingredients[key];
+    let ingredient = ingredients[index];
     ingredient.count++;
     let price = this.state.price + ingredient.price;
-    ingredients[key] = ingredient;
+    ingredients[index] = ingredient;
     let usedIngredients = [...this.state.usedIngredients];
     usedIngredients.push(ingredient.name);
     this.setState({price, ingredients, usedIngredients});
   };
 
-  removeElement = (key) => {
+  removeElement = (index) => {
     let ingredients = [...this.state.ingredients];
-    let ingredient = ingredients[key];
+    let ingredient = ingredients[index];
     if (ingredient.count > 0) {
       ingredient.count--;
-      const index = this.state.usedIngredients.findIndex(p => p.key === key);
+      const indexIng = this.state.usedIngredients.findIndex(p => p.index === index);
       let allUsedIngredients = [...this.state.usedIngredients];
-      allUsedIngredients.splice(index, 1);
+      allUsedIngredients.splice(indexIng, 1);
       let price = this.state.price - ingredient.price;
-      ingredients[key] = ingredient;
+      ingredients[index] = ingredient;
       this.setState({price, ingredients, usedIngredients: allUsedIngredients});
     } else {
       alert('It is impossible to delete zero product');
@@ -58,14 +62,12 @@ class App extends Component {
     return (
       <div className="App">
         <div className="Menu">
-          {INGREDIENTS.map((ing, key) =>
-              <Ingredient
+          {POSITIONS.map((pos, key) =>
+              <POSITIONS
                   key={key}
-                  image={ing.image}
-                  name={ing.name}
+                  image={pos.image}
+                  name={pos.name}
                   onClick={() => this.addElement(key)}
-                  count={this.state.ingredients[key].count}
-                  delete={() => this.removeElement(key)}
               />
           )}
         </div>
