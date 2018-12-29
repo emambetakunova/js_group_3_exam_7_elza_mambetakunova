@@ -6,12 +6,12 @@ import './App.css';
 
 
 const POSITIONS = [
-  {name: 'Hamburger'},
-  {name: 'Cheeseburger'},
-  {name: 'Fries'},
-  {name: 'Coffee'},
-  {name: 'Tea'},
-  {name: 'Cola'}
+  {name: 'Hamburger', price: 110},
+  {name: 'Cheeseburger', price: 120},
+  {name: 'Fries', price: 45},
+  {name: 'Coffee', price: 70},
+  {name: 'Tea', price: 20},
+  {name: 'Cola', price: 35}
 ];
 
 
@@ -20,12 +20,12 @@ class App extends Component {
   state = {
     usedPositions: [],
     positions: [
-      {name: 'Hamburger', price: 110, count: 0},
-      {name: 'Cheeseburger', price: 120, count: 0},
-      {name: 'Fries', price: 45, count: 0},
-      {name: 'Coffee', price: 70, count: 0},
-      {name: 'Tea', price: 20, count: 0},
-      {name: 'Cola', price: 35, count: 0}
+      {name: 'Hamburger', count: 0},
+      {name: 'Cheeseburger', count: 0},
+      {name: 'Fries', count: 0},
+      {name: 'Coffee', count: 0},
+      {name: 'Tea', count: 0},
+      {name: 'Cola', count: 0}
     ]
   };
 
@@ -67,6 +67,7 @@ class App extends Component {
                   key={key}
                   image={pos.image}
                   name={pos.name}
+                  price={pos.price}
                   onClick={() => this.addElement(key)}
               />
           )}
