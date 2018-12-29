@@ -11,7 +11,6 @@ const Positions = props => {
             </div>
         </div>
     )
-
 };
 
 export default Positions;

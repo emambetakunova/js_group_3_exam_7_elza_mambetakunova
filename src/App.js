@@ -21,9 +21,7 @@ const POSITIONS = [
     {name: 'Cola', image: colaImage}
 ];
 
-
 class App extends Component {
-
     state = {
         initialText: 'Order is empty! Please add some items!',
         totalPrice: 0,
@@ -42,7 +40,7 @@ class App extends Component {
         let positions = [...this.state.positions];
         let position = positions[index];
         position.count++;
-        let totalPrice = position.price + this.state.totalPrice;
+        let totalPrice = this.state.totalPrice + position.price;
         positions[index] = position;
         let usedPositions = [...this.state.usedPositions];
         if (!usedPositions.includes(position)) {
