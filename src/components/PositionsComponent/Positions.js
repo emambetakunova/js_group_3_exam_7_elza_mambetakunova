@@ -7,7 +7,7 @@ const Positions = props => {
             <div onClick={props.onClick}>
                 <img src={props.image} alt=""/>
                 <p>{props.name}</p>
-                <p>Price: {props.price}</p>
+                <p><b>Price: </b>{props.price} kgs</p>
             </div>
         </div>
     )

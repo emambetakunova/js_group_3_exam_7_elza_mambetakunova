@@ -7,14 +7,15 @@ const Order = props => {
             <p>{props.initialText}</p>
             {props.usedPositions.map((ing, key) => {
                 return (
-                    <div key={key}>
-                        {ing.name}
-                        {ing.count}
+                    <div className="orderDiv" key={key}>
+                        <p>{ing.name}</p>
+                        <span>{ing.count} x</span>
+                        <span>{ing.price} kgs</span>
                         <button onClick={() => props.remove(key)}>X</button>
                     </div>
                 )
             })}
-            <p>Total price: {props.total}</p>
+            <p className="totalPrice"><b>Total price: </b>{props.total} KGS</p>
         </div>
     )
 };

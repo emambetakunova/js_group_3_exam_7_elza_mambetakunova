@@ -73,7 +73,6 @@ class App extends Component {
             <div className="App">
                 <h4 className="menuItem">Menu</h4>
                 <div className="menu">
-
                     {POSITIONS.map((pos, key) =>
                         <Positions
                             key={key}
@@ -84,6 +83,7 @@ class App extends Component {
                         />
                     )}
                 </div>
+                <h4 className="menuItem">Order list</h4>
                 <div className="orderWrap">
                     <Order
                         initialText = {this.state.initialText}
