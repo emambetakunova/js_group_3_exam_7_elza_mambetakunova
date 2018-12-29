@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-
-import Positions './co'
+import Position from "./components/PositionsComponent/Positions"
 
 import './App.css';
 
 
+
 const POSITIONS = [
-  {name: 'Hamburger', image: hamburgerImage},
-  {name: 'Cheeseburger', image: cheeseburgerImage},
-  {name: 'Fries', image: friesImage},
-  {name: 'Coffee', image: coffeeImage},
-  {name: 'Tea', image: teaImage},
-  {name: 'Cola', image: colaImage}
+  {name: 'Hamburger'},
+  {name: 'Cheeseburger'},
+  {name: 'Fries'},
+  {name: 'Coffee'},
+  {name: 'Tea'},
+  {name: 'Cola'}
 ];
 
 
@@ -63,7 +63,7 @@ class App extends Component {
       <div className="App">
         <div className="Menu">
           {POSITIONS.map((pos, key) =>
-              <POSITIONS
+              <Position
                   key={key}
                   image={pos.image}
                   name={pos.name}
