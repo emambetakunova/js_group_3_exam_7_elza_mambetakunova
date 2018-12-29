@@ -1,6 +1,13 @@
 .menu {
-    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+.menuItem {
+
 }
 .position {
-
+    border: 1px solid #000;
+    border-radius: 8px;
+    width: 30%;
+    margin: 10px;
 }

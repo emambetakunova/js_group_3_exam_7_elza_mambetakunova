@@ -13,18 +13,19 @@ import './App.css';
 
 
 const POSITIONS = [
-    {name: 'Hamburger', image: hamburgerImage, price: 110},
-    {name: 'Cheeseburger', image: cheeseburgerImage, price: 110},
-    {name: 'Fries', image: friesImage, price: 45},
-    {name: 'Coffee', image: coffeeImage, price: 70},
-    {name: 'Tea', image: teaImage, price: 20},
-    {name: 'Cola', image: colaImage, price: 35}
+    {name: 'Hamburger', image: hamburgerImage},
+    {name: 'Cheeseburger', image: cheeseburgerImage},
+    {name: 'Fries', image: friesImage},
+    {name: 'Coffee', image: coffeeImage},
+    {name: 'Tea', image: teaImage},
+    {name: 'Cola', image: colaImage}
 ];
 
 
 class App extends Component {
 
     state = {
+        initialText: 'Order is empty! Please add some items!',
         totalPrice: 0,
         usedPositions: [],
         positions: [
@@ -41,55 +42,54 @@ class App extends Component {
         let positions = [...this.state.positions];
         let position = positions[index];
         position.count++;
-        console.log(position);
         let totalPrice = position.price + this.state.totalPrice;
         positions[index] = position;
         let usedPositions = [...this.state.usedPositions];
-
         if (!usedPositions.includes(position)) {
             usedPositions.push(position);
         }
-        console.log(usedPositions)
-        this.setState({totalPrice, positions, usedPositions});
+        let initialText = ' ';
+        this.setState({totalPrice, positions, usedPositions, initialText});
     };
 
     removeElement = (index) => {
-        let positions = [...this.state.positions];
-        let position = positions[index];
-        if (position.count > 0) {
-            position.count--;
-            const indexIng = this.state.usedPositions.findIndex(p => p.index === index);
-            let allUsedPositions = [...this.state.usedPositions];
-            allUsedPositions.splice(indexIng, 1);
-            let totalPrice = position.price - this.state.totalPrice;;
-            positions[index] = position;
-            this.setState({totalPrice, positions, usedIngredients: allUsedPositions});
+        let usedPositions = [...this.state.usedPositions];
+        let usedPosition = usedPositions[index];
+        if (usedPosition.count > 1) {
+            usedPosition.count--;
+            let totalPrice = this.state.totalPrice - usedPosition.price;
+            usedPositions[index] = usedPosition;
+            this.setState({totalPrice, usedPositions});
         } else {
-            alert('It is impossible to delete zero product');
+            usedPositions.splice(index, 1);
+            let totalPrice = this.state.totalPrice - usedPosition.price;
+            let initialText = 'Order is empty! Please add some items!';
+            this.setState({totalPrice, usedPositions, initialText});
         }
-
     };
-
 
     render() {
         return (
             <div className="App">
+                <h4 className="menuItem">Menu</h4>
                 <div className="menu">
+
                     {POSITIONS.map((pos, key) =>
                         <Positions
                             key={key}
                             image={pos.image}
                             name={pos.name}
-                            price={pos.price}
+                            price={this.state.positions[key].price}
                             onClick={() => this.addElement(key)}
                         />
                     )}
                 </div>
-                <div className="order">
+                <div className="orderWrap">
                     <Order
-                        usedPositions = {this.state.usedPositions}
+                        initialText = {this.state.initialText}
+                        usedPositions={this.state.usedPositions}
                         total={this.state.totalPrice}
-                        // remove={() => this.removeElement(key)}
+                        remove={this.removeElement}
                     />
                 </div>
             </div>
