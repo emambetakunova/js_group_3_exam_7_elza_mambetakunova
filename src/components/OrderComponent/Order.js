@@ -4,13 +4,16 @@ import "./Order.css";
 const Order = props => {
     return (
         <div className="order">
-            {props.usedIngredients.map((ing, key) => {
+            {props.usedPositions.map((ing, key) => {
                 return (
-                    <div key={key}>{ing}</div>
+                    <div key={key}>
+                        {ing.name}
+                        {ing.count}
+                        <button onClick={props.remove}>X</button>
+                    </div>
                 )
             })}
-            <button onClick={props.remove}>X</button>
-            <p>{props.count}</p>
+
             <p>Total price: {props.total}</p>
         </div>
     )

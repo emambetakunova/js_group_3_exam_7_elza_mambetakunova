@@ -2,22 +2,30 @@ import React, {Component} from 'react';
 import Positions from "./components/PositionsComponent/Positions"
 import Order from "./components/OrderComponent/Order"
 
+import hamburgerImage from './assets/hamburger.png';
+import cheeseburgerImage from './assets/cheeseburger.png';
+import friesImage from './assets/fries.png';
+import coffeeImage from './assets/coffee.png';
+import teaImage from './assets/tea.png';
+import colaImage from './assets/cola.png';
+
 import './App.css';
 
 
 const POSITIONS = [
-    {name: 'Hamburger', price: 110},
-    {name: 'Cheeseburger', price: 120},
-    {name: 'Fries', price: 45},
-    {name: 'Coffee', price: 70},
-    {name: 'Tea', price: 20},
-    {name: 'Cola', price: 35}
+    {name: 'Hamburger', image: hamburgerImage, price: 110},
+    {name: 'Cheeseburger', image: cheeseburgerImage, price: 110},
+    {name: 'Fries', image: friesImage, price: 45},
+    {name: 'Coffee', image: coffeeImage, price: 70},
+    {name: 'Tea', image: teaImage, price: 20},
+    {name: 'Cola', image: colaImage, price: 35}
 ];
 
 
 class App extends Component {
 
     state = {
+        totalPrice: 0,
         usedPositions: [],
         positions: [
             {name: 'Hamburger', count: 0, price: 110},
@@ -33,12 +41,16 @@ class App extends Component {
         let positions = [...this.state.positions];
         let position = positions[index];
         position.count++;
-        let price = this.state.price + position.price;
+        console.log(position);
+        let totalPrice = position.price + this.state.totalPrice;
         positions[index] = position;
         let usedPositions = [...this.state.usedPositions];
-        usedPositions.push(position.name, position.price);
-        console.log(usedPositions);
-        this.setState({price, positions, usedPositions});
+
+        if (!usedPositions.includes(position)) {
+            usedPositions.push(position);
+        }
+        console.log(usedPositions)
+        this.setState({totalPrice, positions, usedPositions});
     };
 
     removeElement = (index) => {
@@ -49,9 +61,9 @@ class App extends Component {
             const indexIng = this.state.usedPositions.findIndex(p => p.index === index);
             let allUsedPositions = [...this.state.usedPositions];
             allUsedPositions.splice(indexIng, 1);
-            let price = this.state.price - position.price;
+            let totalPrice = position.price - this.state.totalPrice;;
             positions[index] = position;
-            this.setState({price, positions, usedIngredients: allUsedPositions});
+            this.setState({totalPrice, positions, usedIngredients: allUsedPositions});
         } else {
             alert('It is impossible to delete zero product');
         }
@@ -75,12 +87,11 @@ class App extends Component {
                 </div>
                 <div className="order">
                     <Order
-                        count={this.state.count}
-                        usedIngredients={this.state.usedPositions}
+                        usedPositions = {this.state.usedPositions}
+                        total={this.state.totalPrice}
+                        // remove={() => this.removeElement(key)}
                     />
-
                 </div>
-
             </div>
         );
     }
