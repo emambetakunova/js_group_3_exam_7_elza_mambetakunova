@@ -1,9 +1,9 @@
 import React from "react";
 import "./Positions.css";
 
-const Position = props => {
+const Positions = props => {
     return (
-        <div className="Ingredient">
+        <div className="position">
             <div onClick={props.onClick}>
                 <img src={props.image} alt=""/>
                 <p>{props.name}</p>
@@ -14,4 +14,4 @@ const Position = props => {
 
 };
 
-export default Position;
+export default Positions;
